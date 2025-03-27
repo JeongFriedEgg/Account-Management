@@ -8,3 +8,5 @@ spring:
   jpa:
     show-sql: true
     database: mysql
+    hibernate:
+      ddl-auto: update
