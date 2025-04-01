@@ -14,6 +14,7 @@ public class AccountDto {
     private String accountNumber;
     private String accountName;
     private LocalDateTime registeredAt;
+    private LocalDateTime unRegisteredAt;
 
     public static AccountDto fromEntity(Account account) {
         return AccountDto.builder()
@@ -21,6 +22,7 @@ public class AccountDto {
                 .accountNumber(account.getAccountNumber())
                 .accountName(account.getAccountName())
                 .registeredAt(account.getRegisteredAt())
+                .unRegisteredAt(account.getUnRegisteredAt())
                 .build();
     }
 }
