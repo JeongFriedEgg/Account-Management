@@ -17,6 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static com.example.account.type.ErrorCode.*;
@@ -360,5 +362,65 @@ class AccountServiceTest {
                 () -> accountService.deleteAccount(1L,"1234567890","1234"));
         // then
         assertEquals(ACCOUNT_ALREADY_UNREGISTERED, exception.getErrorCode());
+    }
+
+    @Test
+    @DisplayName("계좌 확인 성공")
+    void getAccountsInfoByUserId_Success() {
+        // given
+        AccountUser user = AccountUser.builder()
+                .id(10L)
+                .name("Egg")
+                .build();
+        List<Account> accounts = Arrays.asList(
+                Account.builder()
+                        .accountUser(user)
+                        .accountNumber("1111111111")
+                        .balance(1000L)
+                        .accountName("Egg")
+                        .build(),
+                Account.builder()
+                        .accountUser(user)
+                        .accountNumber("2222222222")
+                        .balance(2000L)
+                        .accountName("EggName")
+                        .build(),
+                Account.builder()
+                        .accountUser(user)
+                        .accountNumber("3333333333")
+                        .balance(3000L)
+                        .accountName("Egg")
+                        .build()
+        );
+        given(accountUserRepository.findById(anyLong()))
+                .willReturn(Optional.of(user));
+        given(accountRepository.findByAccountUser(any()))
+                .willReturn(accounts);
+        // when
+        List<AccountDto> accountDtos = accountService.getAccountsInfoByUserId(1L);
+        // then
+        assertEquals(3,accountDtos.size());
+        assertEquals("1111111111",accountDtos.get(0).getAccountNumber());
+        assertEquals(1000,accountDtos.get(0).getBalance());
+        assertEquals("Egg",accountDtos.get(0).getAccountName());
+        assertEquals("2222222222",accountDtos.get(1).getAccountNumber());
+        assertEquals(2000,accountDtos.get(1).getBalance());
+        assertEquals("EggName",accountDtos.get(1).getAccountName());
+        assertEquals("3333333333",accountDtos.get(2).getAccountNumber());
+        assertEquals(3000,accountDtos.get(2).getBalance());
+        assertEquals("Egg",accountDtos.get(2).getAccountName());
+    }
+
+    @Test
+    @DisplayName("해당 유저 없음 - 계좌 확인 실패")
+    void getAccountsInfoByUserId_UserNotFound() {
+        // given
+        given(accountUserRepository.findById(anyLong()))
+                .willReturn(Optional.empty());
+        // when
+        AccountException exception = assertThrows(AccountException.class,
+                () -> accountService.getAccountsInfoByUserId(1L));
+        // then
+        assertEquals(USER_NOT_FOUND, exception.getErrorCode());
     }
 }
