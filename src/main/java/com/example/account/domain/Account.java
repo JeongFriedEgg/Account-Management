@@ -45,4 +45,8 @@ public class Account {
     public void useBalance(Long amount){
         balance -= amount;
     }
+
+    public void cancelBalance(Long amount) {
+        balance += amount;
+    }
 }

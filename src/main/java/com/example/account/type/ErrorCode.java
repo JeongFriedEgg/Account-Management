@@ -20,7 +20,13 @@ public enum ErrorCode {
     ACCOUNT_PASSWORD_MISMATCH(1104,"계좌 비밀번호가 일치하지 않습니다."),
     ACCOUNT_ALREADY_UNREGISTERED(1105,"계좌가 이미 해지되었습니다."),
     BALANCE_NOT_EMPTY(1106,"잔액이 있는 계좌는 해지할 수 없습니다."),
-    AMOUNT_EXCEED_BALANCE(1107,"거래 금액이 잔액보다 큽니다.")
+    AMOUNT_EXCEED_BALANCE(1107,"거래 금액이 잔액보다 큽니다."),
+
+    // 12XX : 거래
+    TRANSACTION_NOT_FOUND(1200,"해당 거래가 없습니다."),
+    TRANSACTION_ACCOUNT_MISMATCH(1201,"이 거래는 해당 계좌에서 발생한 거래가 아닙니다."),
+    TRANSACTION_AMOUNT_MISMATCH(1202,"거래금액과 거래 취소금액이 일치하지 않습니다."),
+    TOO_OLD_TRANSACTION_TO_CANCEL(1203,"1년이 지난 거래는 취소가 불가능합니다."),
     ;
 
     private final int status;
