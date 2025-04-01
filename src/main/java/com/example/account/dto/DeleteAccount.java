@@ -1,5 +1,7 @@
 package com.example.account.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -10,6 +12,7 @@ public class DeleteAccount {
     @Getter
     @Setter
     @AllArgsConstructor
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class Request {
         @NotNull
         @Min(1)
@@ -27,6 +30,7 @@ public class DeleteAccount {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class Response {
         private Long userId;
         private String accountNumber;
