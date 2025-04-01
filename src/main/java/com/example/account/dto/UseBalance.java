@@ -20,17 +20,17 @@ public class UseBalance {
         @Min(1)
         private Long userId;
 
-        @NotBlank
-        @Size(min = 10, max = 10)
+        @NotNull(message = "계좌번호는 필수입니다.")
+        @Size(min = 10, max = 10, message = "계좌번호의 자리수는 10자리 입니다.")
         private String accountNumber;
 
-        @NotBlank
-        @Size(min = 4, max = 4)
+        @NotNull(message = "계좌 비밀번호는 필수입니다.")
+        @Size(min = 4, max = 4, message = "계좌 비밀번호의 자리수는 4자리 입니다.")
         private String accountPassword;
 
-        @NotNull
-        @Min(1000)
-        @Max(100_000_000)
+        @NotNull(message = "거래 금액은 필수입니다.")
+        @Min(value = 1000, message = "최소 거래금액은 1000원 입니다.")
+        @Max(value = 100_000_000, message = "최대 거래금액은 1억원 입니다.")
         private Long amount;
     }
 

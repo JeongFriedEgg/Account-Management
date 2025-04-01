@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,10 +19,12 @@ public class DeleteAccount {
         @Min(1)
         private Long userId;
 
-        @NotNull
+        @NotNull(message = "계좌번호는 필수입니다.")
+        @Size(min = 10, max = 10, message = "계좌번호의 자리수는 10자리 입니다.")
         private String accountNumber;
 
-        @NotNull
+        @NotNull(message = "계좌 비밀번호는 필수입니다.")
+        @Size(min = 4, max = 4, message = "계좌 비밀번호의 자리수는 4자리 입니다.")
         private String accountPassword;
     }
 

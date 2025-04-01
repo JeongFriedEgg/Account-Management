@@ -6,6 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
+    // 900
+    VALIDATION_FAILED(999, "잘못된 입력 값입니다."),
     // 10XX : 사용자
     USER_NOT_FOUND(1000,"사용자가 없습니다."),
 

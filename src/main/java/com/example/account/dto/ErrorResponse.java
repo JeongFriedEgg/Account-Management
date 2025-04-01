@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,5 +16,5 @@ import lombok.*;
 public class ErrorResponse {
     private int status;
     private ErrorCode errorCode;
-    private String errorMessage;
+    private List<?> errorMessages;
 }
