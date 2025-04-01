@@ -41,4 +41,8 @@ public class Account {
 
     private LocalDateTime registeredAt;
     private LocalDateTime unRegisteredAt;
+
+    public void useBalance(Long amount){
+        balance -= amount;
+    }
 }

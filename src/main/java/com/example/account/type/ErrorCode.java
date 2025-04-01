@@ -18,6 +18,7 @@ public enum ErrorCode {
     ACCOUNT_PASSWORD_MISMATCH(1104,"계좌 비밀번호가 일치하지 않습니다."),
     ACCOUNT_ALREADY_UNREGISTERED(1105,"계좌가 이미 해지되었습니다."),
     BALANCE_NOT_EMPTY(1106,"잔액이 있는 계좌는 해지할 수 없습니다."),
+    AMOUNT_EXCEED_BALANCE(1107,"거래 금액이 잔액보다 큽니다.")
     ;
 
     private final int status;
